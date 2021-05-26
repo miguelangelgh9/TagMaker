@@ -25,21 +25,18 @@ def fourCeil(total):
         r+=1
     return int(r/4)
 
+print("Este programa extrae la información de tesis del OPAC de la UES y la pone en viñetas previamente preparadas\nLa numeración en el documento final está al revés, es decir que las primeras 4 tesis de la lista aparecen en la última página y las últimas 4 tesis de la lista aparecen en la primera página. Tome esto en cuenta al buscar las tesis acorde a los comentarios")
+
 tags=[]
 
 doc=DocxTemplate('emptyTemplate.docx')    
 para=doc.paragraphs[0]._p
-
-lista=[15106295,
-15106296,
-15106297,
-15106298,
-15106299]
+inicio=int(input("Digite el primer codigo de barra: "))
+final=int(input("Digite el último codigo de barra: "))
+lista=range(inicio,final+1)
 total=len(lista)
 fceil=fourCeil(total)
 
-
-print("Este programa extrae la información de tesis del OPAC de la UES y la pone en viñetas previamente preparadas\nLa numeración en el documento final está al revés, es decir que las primeras 4 tesis de la lista aparecen en la última página y las últimas 4 tesis de la lista aparecen en la primera página. Tome esto en cuenta al buscar las tesis acorde a los comentarios")
 #Extracción de la información de tesis
 for c,i in enumerate(lista):
     comentario=""
