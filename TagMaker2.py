@@ -75,22 +75,26 @@ for c,i in enumerate(lista):
 #Ordenamiento de información en las figuras respectivas
 cs={}
 for c,i in enumerate(tags):
-    sobre=str(i['codT'])+"\n"+str(i["codC"])+"\n"+str(i["cutter"])+"\n"+str(i["fecha"])+"\n"+str(i["barcode"])+"\n"+str(i["autor"])+"\n"+str(i["titulo"])+"\n"+"MFN: "+str(i["reg"])
+    sobreu=str(i['codT'])+"\n"+str(i["codC"])+"\n"+str(i["cutter"])+"\n"+str(i["fecha"])+"\n"+str(i["barcode"])+"\n"+str(i["autor"])
+    middle=str(i["titulo"])
+    sobred="MFN: "+str(i["reg"])
     
     lomo=(i["codT"]+"\n"+
     i["codC"]+"\n"+
     i["cutter"]+"\n"+
     i["fecha"])
     
-    tarjeta=(
-    i["autor"]+"\n"+
-    i["titulo"]+"\n"+
-    i["codT"]+" "+str(i["codC"])+" "+i["cutter"]+" "+str(i["fecha"])+" "+str(i["barcode"])+" "+"("+str(i["reg"])+")"
-    )
+    tarjetau=i["autor"]
+    tarjetad=(i["codT"]+" "+str(i["codC"])+" "+i["cutter"]+" "+str(i["fecha"])+" "+str(i["barcode"])+" "+"("+str(i["reg"])+")")
 
-    context={"sobre"+str(c+1):sobre,
+    context={"sobreu"+str(c+1):sobreu,
+             "sobrem"+str(c+1):middle,
+             "sobred"+str(c+1):sobred,
              "lomo"+str(c+1):lomo,
-             "tarjeta"+str(c+1):tarjeta}
+             "tarjetau"+str(c+1):tarjetau,
+             "tarjetam"+str(c+1):middle,
+             "tarjetad"+str(c+1):tarjetad,
+             }
     cs.update(context)
 
 
@@ -103,21 +107,21 @@ for c,i in enumerate(tags):
 #Creación del documento completo antes del render final
 for c,i in enumerate(range(fceil)):
     template=DocxTemplate('template.docx')
+    fc={}
+    for f in range(1,5):
+        correlativo=str(c*4+f)
+        context={
+            "sobreu"+str(f):"{{sobreu"+correlativo+"}}",
+            "sobrem"+str(f):"{{sobrem"+correlativo+"}}",
+            "sobred"+str(f):"{{sobred"+correlativo+"}}",
+            "lomo"+str(f):"{{lomo"+correlativo+"}}",
+            "tarjetau"+str(f):"{{tarjetau"+correlativo+"}}",
+            "tarjetam"+str(f):"{{tarjetam"+correlativo+"}}",
+            "tarjetad"+str(f):"{{tarjetad"+correlativo+"}}"
+            }
+        fc.update(context)
     
-    context={"sobre1":"{{sobre"+str(c*4+1)+"}}",
-             "lomo1":"{{lomo"+str(c*4+1)+"}}",
-             "tarjeta1":"{{tarjeta"+str(c*4+1)+"}}",
-             "sobre2":"{{sobre"+str(c*4+2)+"}}",
-             "lomo2":"{{lomo"+str(c*4+2)+"}}",
-             "tarjeta2":"{{tarjeta"+str(c*4+2)+"}}",
-             "sobre3":"{{sobre"+str(c*4+3)+"}}",
-             "lomo3":"{{lomo"+str(c*4+3)+"}}",
-             "tarjeta3":"{{tarjeta"+str(c*4+3)+"}}",
-             "sobre4":"{{sobre"+str(c*4+4)+"}}",
-             "lomo4":"{{lomo"+str(c*4+4)+"}}",
-             "tarjeta4":"{{tarjeta"+str(c*4+4)+"}}",
-        }
-    template.render(context)
+    template.render(fc)
     tabla=deepcopy(template.tables[0]._tbl)
     para.addnext(tabla)
 
