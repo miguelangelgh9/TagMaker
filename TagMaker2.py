@@ -52,7 +52,7 @@ for c,i in enumerate(lista):
         comentario=comentario+"Falta un simbolo '/' en el título de esta tesis.\n"
         titulo=soup.find("h1",class_="title")
 
-    if "autor" in soup.find("h5",class_="author").text:
+    if "autor" in soup.find("h5",class_="author").text and "[" in soup.find("h5",class_="author").text:
         autor=soup.find("h5",class_="author").text[4:-9]
     else:
         comentario=comentario+"Hace falta la función de responsabilidad en la entrada principal de autor"
