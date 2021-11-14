@@ -1,0 +1,16 @@
+1. Pase los contenidos del ZIP a una carpeta.
+
+2. Descargue e instale Python al visitar este sitio:
+https://www.python.org/downloads/
+Si está usando Windows 7 puede hacer doble clic en el instalador de python apropiado que trae el paquete.
+Consulte este artículo si no conoce si tiene 64 o 32 bits
+https://support.microsoft.com/es-es/windows/windows-de-32-y-64-bits-preguntas-frecuentes-c6ca9541-8dce-4d48-0415-94a3faa2e13d
+
+3. Dentro de la carpeta donde dejó el programa, presione en un espacio en blanco de la barra de dirección, 
+escriba cmd y presione enter.
+(La barra de dirección es la barra directamente arriba de la lista de los archivos)
+
+4. Una vez la terminal (Ventana negra) este abierta, copie y pegue lo siguiente (Con clic derecho de mouse)
+py -m pip install -r requirements.txt
+
+5. Una vez termine el proceso ya puede hacer doble clic en el programa para usarlo.
